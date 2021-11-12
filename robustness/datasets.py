@@ -19,7 +19,7 @@ import pathlib
 
 import torch as ch
 import torch.utils.data
-from . import imagenet_models, cifar_models
+#from . import imagenet_models, cifar_models
 from torchvision import transforms, datasets
 
 from .tools import constants
