@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.utils.checkpoint as cp
 from collections import OrderedDict
-from torch.hub import load_state_dict_from_url
+# from torch.hub import load_state_dict_from_url
 from torch import Tensor
 from torch.jit.annotations import List
 from ..tools.custom_modules import FakeReLU
