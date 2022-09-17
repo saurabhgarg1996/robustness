@@ -57,7 +57,7 @@ class Attacker(ch.nn.Module):
     However, the :meth:`robustness.Attacker.forward` function below
     documents the arguments supported for adversarial attacks specifically.
     """
-    def __init__(self, model, dataset):
+    def __init__(self, model, mean, std):
         """
         Initialize the Attacker
 
@@ -66,7 +66,7 @@ class Attacker(ch.nn.Module):
             Dataset dataset : dataset the model is trained on, only used to get mean and std for normalization
         """
         super(Attacker, self).__init__()
-        self.normalize = helpers.InputNormalize(dataset.mean, dataset.std)
+        self.normalize = helpers.InputNormalize(mean, std)
         self.model = model
 
     def forward(self, x, target, *_, constraint, eps, step_size, iterations,
@@ -268,11 +268,11 @@ class AttackerModel(ch.nn.Module):
     For a more comprehensive overview of this class, see 
     :doc:`our detailed walkthrough <../example_usage/input_space_manipulation>`.
     """
-    def __init__(self, model, dataset):
+    def __init__(self, model, mean, std):
         super(AttackerModel, self).__init__()
-        self.normalizer = helpers.InputNormalize(dataset.mean, dataset.std)
+        self.normalizer = helpers.InputNormalize(mean, std)
         self.model = model
-        self.attacker = Attacker(model, dataset)
+        self.attacker = Attacker(model, mean, std)
 
     def forward(self, inp, target=None, make_adv=False, with_latent=False,
                 fake_relu=False, no_relu=False, with_image=True, **attacker_kwargs):
