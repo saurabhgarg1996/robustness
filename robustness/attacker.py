@@ -323,8 +323,8 @@ class AttackerModel(ch.nn.Module):
         if no_relu and fake_relu:
             raise ValueError("Options 'no_relu' and 'fake_relu' are exclusive")
 
-        output = self.model(normalized_inp, with_latent=with_latent,
-                                fake_relu=fake_relu, no_relu=no_relu)
+        output = self.model(normalized_inp) 
+
         if with_image:
             return (output, inp)
         return output
